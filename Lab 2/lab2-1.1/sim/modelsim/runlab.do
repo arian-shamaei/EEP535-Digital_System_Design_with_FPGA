@@ -8,6 +8,7 @@ vlog "../rtl/mux2_1.sv"
 vlog "../rtl/mux4_1.sv"
 vlog "../rtl/seg7.sv"
 vlog "../rtl/DE1_SoC.sv"
+vlog "../rtl/simple.sv"
 
 
 # Call vsim to invoke simulator
