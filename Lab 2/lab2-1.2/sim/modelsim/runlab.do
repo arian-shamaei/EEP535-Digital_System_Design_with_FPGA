@@ -4,12 +4,12 @@ vlib work
 # Compile Verilog
 #     All Verilog files that are part of this design should have
 #     their own "vlog" line below.
-#vlog "C:/q/EEP535/Lab 2/lab2-1.1/rtl/mux2_1.sv"
-#vlog "C:/q/EEP535/Lab 2/lab2-1.1/rtl/mux4_1.sv"
-#vlog "C:/q/EEP535/Lab 2/lab2-1.1/rtl/seg7.sv"
-vlog "C:/q/EEP535/Lab 2/lab2-1.1/rtl/DE1_SoC.sv"
-vlog "C:/q/EEP535/Lab 2/lab2-1.1/rtl/simple.sv"
-vlog "C:/q/EEP535/Lab 2/lab2-1.1/rtl/clock_divider.sv"
+#vlog "C:/q/EEP535/Lab 2/lab2-1.2/rtl/mux2_1.sv"
+#vlog "C:/q/EEP535/Lab 2/lab2-1.2/rtl/mux4_1.sv"
+#vlog "C:/q/EEP535/Lab 2/lab2-1.2/rtl/seg7.sv"
+vlog "C:/q/EEP535/Lab 2/lab2-1.2/rtl/DE1_SoC.sv"
+vlog "C:/q/EEP535/Lab 2/lab2-1.2/rtl/simple.sv"
+vlog "C:/q/EEP535/Lab 2/lab2-1.2/rtl/clock_divider.sv"
 
 
 # Call vsim to invoke simulator
