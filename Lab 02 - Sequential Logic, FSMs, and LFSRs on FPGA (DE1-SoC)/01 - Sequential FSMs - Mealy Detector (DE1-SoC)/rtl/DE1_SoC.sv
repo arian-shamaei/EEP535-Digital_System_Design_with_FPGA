@@ -14,14 +14,14 @@ module DE1_SoC (
   
   assign reset = SW[9];
   parameter whichClock = 25; // 0.75 Hz clock
-  clock_divider cdiv(.clock(CLOCK_50), .reset(reset), .divided_clocks(div_clocks));
+  clock_divider cdiv(.clock(CLOCK_50), .reset(reset), .divided_clocks(div_clk));
   
   // CLock selection - allows for easy switching between simulation and board clocks
   
   logic clkSelect;
   
-  assign clkSelect = CLOCK_50; // for simulation
-  //assign clkSelect = div_clk[whichClock]; // for board
+  //assign clkSelect = CLOCK_50; // for simulation
+  assign clkSelect = div_clk[whichClock]; // for board
 
   // Set up FSM inputs and outputs
   logic w, out;
@@ -34,7 +34,15 @@ module DE1_SoC (
   assign LEDR[9] = clkSelect;
   assign LEDR[8] = reset;
   assign LEDR[0] = out;
-endmodule
+
+  endmodule
+
+
+
+
+
+
+
 
 module DE1_SoC_testbench();
 	logic CLOCK_50;

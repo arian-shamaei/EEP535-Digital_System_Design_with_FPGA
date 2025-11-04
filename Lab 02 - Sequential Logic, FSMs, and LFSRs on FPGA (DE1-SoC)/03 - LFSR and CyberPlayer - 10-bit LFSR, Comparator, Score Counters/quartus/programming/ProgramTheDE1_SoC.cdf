@@ -7,7 +7,7 @@ JedecChain;
     Device PartName(SOCVHPS) MfrSpec(OpMask(0));
   P ActionCode(Cfg)
     Device PartName(5CSEMA5F31)
-	File ("C:/q/tmp/eep535-lab2-3-main/Arian_lab2-3/quartus/build/DE1_SoC.sof")
+	File("..\build\DE1_SoC.sof")
     MfrSpec(OpMask(1));
 
 ChainEnd;
