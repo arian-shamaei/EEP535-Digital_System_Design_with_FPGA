@@ -1,4 +1,4 @@
-# Register Lookup Through Binary Search
+# 02.2 - Register Lookup Through Binary Search
 
 Overview
 - Implement a binary-search based register lookup using an ASM/ASMD approach with on-chip memory.

@@ -1,4 +1,4 @@
-# 03 — LFSR & CyberPlayer: 10‑bit LFSR, Comparator, Score Counters
+# 03.1 - LFSR & CyberPlayer: 10-bit LFSR, Comparator, Score Counters
 
 1. Overview
 
@@ -100,4 +100,5 @@ flowchart LR
 18. Acknowledgments
 
 - EEP 535 materials; Xilinx XAPP 052 for tap references.
+
 

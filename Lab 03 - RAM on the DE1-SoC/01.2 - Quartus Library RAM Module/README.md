@@ -1,4 +1,4 @@
-# 012 - Quartus Library RAM Module
+# 01.2 - Quartus Library RAM Module
 
 Overview
 - Instantiate the Quartus on-chip RAM IP (e.g., 32x4) on the DE1-SoC.
@@ -17,3 +17,4 @@ What to verify
 - Compilation succeeds with the IP core.
 - At power-up the RAM reflects `.mif` initialization.
 - Manual writes update the addressed locations and display correctly.
+

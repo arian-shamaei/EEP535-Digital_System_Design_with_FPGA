@@ -1,4 +1,4 @@
-# 02 — Communicating Sequential Logic: Tug‑of‑War with Synchronizers
+# 02.1 - Communicating Sequential Logic: Tug-of-War with Synchronizers
 
 1. Overview
 
@@ -107,4 +107,5 @@ flowchart TB
 18. Acknowledgments
 
 - EEP 535 course materials.
+
 

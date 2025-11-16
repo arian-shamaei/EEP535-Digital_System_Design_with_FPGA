@@ -1,4 +1,4 @@
-# 021 - ASM with Datapath Exercises
+# 02.1 - ASM with Datapath Exercises
 
 Overview
 - Practice Algorithmic State Machine (ASM/ASMD) design by implementing small stateful circuits that mix control and datapath (e.g., bit counter).
@@ -16,3 +16,4 @@ How to run
 What to verify
 - State transitions follow the specified ASM chart.
 - Datapath updates (counters, shifts, flags) occur in the correct states and yield the expected outputs.
+

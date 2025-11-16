@@ -1,4 +1,4 @@
-# 014 - Quartus RAM with Independent Read and Write
+# 01.4 - Quartus RAM with Independent Read and Write
 
 Overview
 - Configure a Quartus-generated RAM with separate read and write addresses to explore dual-port style access.
@@ -16,3 +16,4 @@ How to run
 What to verify
 - Writes occur only when enabled and affect the correct write address.
 - Reads reflect the selected read address even while writes target a different address.
+

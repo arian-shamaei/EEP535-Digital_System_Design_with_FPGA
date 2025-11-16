@@ -1,4 +1,4 @@
-# 01 — Sequential FSMs: Mealy Detector (DE1‑SoC)
+# 01.1 - Sequential FSMs: Mealy Detector (DE1-SoC)
 
 1. Overview
 
@@ -87,4 +87,5 @@ flowchart LR
 18. Acknowledgments
 
 - EEP 535 course materials.
+
 

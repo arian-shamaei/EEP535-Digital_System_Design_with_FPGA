@@ -1,4 +1,4 @@
-# 013 - Memory Using SystemVerilog D-FlipFlops
+# 01.3 - Memory Using SystemVerilog D-FlipFlops
 
 Overview
 - Build a small RAM purely from SystemVerilog flip-flops (no Quartus IP) to understand behavioral vs. structural memory inference.
@@ -16,3 +16,4 @@ How to run
 What to verify
 - Functional equivalence to the IP-based RAM for the tested depth/width.
 - Writes are stored and read back correctly at all addresses.
+

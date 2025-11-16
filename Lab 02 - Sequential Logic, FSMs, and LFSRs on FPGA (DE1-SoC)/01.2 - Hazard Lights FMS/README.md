@@ -1,4 +1,4 @@
-# 01.1 — Hazard Lights LED Sequencer (DE1‑SoC)
+# 01.2 - Hazard Lights LED Sequencer (DE1-SoC)
 
 1. Overview
 
@@ -88,4 +88,5 @@ flowchart LR
 18. Acknowledgments
 
 - EEP 535 course materials.
+
 
