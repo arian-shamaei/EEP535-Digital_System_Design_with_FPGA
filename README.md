@@ -42,6 +42,7 @@ This repository organizes lab materials and student projects for EEP 535. Labs t
 
 1. Open a sublab folder in Quartus; review its README for details.
 2. Simulate in ModelSim; then compile and program DE1-SoC for hardware demos.
+3. SignalTap; used to probe and analyze hardware pins 
 
 ## License
 
