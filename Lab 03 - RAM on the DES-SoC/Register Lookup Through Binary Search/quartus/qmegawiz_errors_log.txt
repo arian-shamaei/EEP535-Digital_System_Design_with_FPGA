@@ -1,0 +1,13 @@
+
+
+C:/q/EEP535/Lab 03 - RAM on the DES-SoC/01 -  Quartus Library RAM Module Tutorial/quartus/rtl/ram32x4.v
+
+Nov 04 10AM:38:43>: Extra tokens at the end of the generation mode line will be ignored
+
+C:/q/EEP535/Lab 03 - RAM on the DES-SoC/01 -  Quartus Library RAM Module Tutorial/quartus/rtl/ram32x4.v
+
+Nov 04 10AM:38:45>: Extra tokens at the end of the generation mode line will be ignored
+
+C:/q/EEP535/Lab 03 - RAM on the DES-SoC/01 -  Quartus Library RAM Module Tutorial/quartus/rtl/ram32x4.v
+
+Nov 10 02PM:44:45>: Extra tokens at the end of the generation mode line will be ignored

@@ -34,60 +34,53 @@ endmodule
 
  
 module DE1_SoC_testbench ();
-  logic [9:0] out;
-  logic       w;
-  logic [3:0] val;
-  logic [4:0] addr;
-  logic       CLOCK_50;
+  logic [9:0] out;              
+  logic [6:0] hex0, hex1, hex2, hex3, hex4, hex5; 
+  logic       w;                 
+  logic [3:0] val;              
+  logic [4:0] addr;             
+  logic       clk;              
 
-  
+  // Instantiate  
   DE1_SoC dut (
     .LEDR(out),
-    .KEY({3'b111, w}),       
-    .SW({1'b0, val, addr}),
-    .CLOCK_50(CLOCK_50)
+    .HEX0(hex0), .HEX1(hex1), .HEX2(hex2), .HEX3(hex3), .HEX4(hex4), .HEX5(hex5),
+    .KEY({3'b111, clk}),               
+    .SW({w, addr, val})               
   );
 
+  // Local clock generation (drives KEY[0])
   parameter CLOCK_PERIOD = 100;
-
-  
   initial begin
-    CLOCK_50 = 1'b0;
-    forever #(CLOCK_PERIOD/2) CLOCK_50 = ~CLOCK_50;
+    clk = 1'b0;
+    forever #(CLOCK_PERIOD/2) clk = ~clk;
   end
 
-
+  // Stimulus
   initial begin
     // init
-    w    = 1'b1;      
+    w    = 1'b0;          // deassert write
     val  = 4'b0000;
     addr = 5'b00000;
 
-    repeat (2) @(posedge CLOCK_50);
+    repeat (2) @(posedge clk);
 
-    // WRITE: 4'b1100 to address 00001
+    // WRITE: 4'b1100 to address 00001 (pulse w high for one cycle)
     addr = 5'b00001;
     val  = 4'b1100;
-    @(posedge CLOCK_50);      
+    @(posedge clk);
+    w = 1'b1; @(posedge clk); w = 1'b0;
 
-    w = 1'b0;                 
-    @(posedge CLOCK_50);
-    w = 1'b1;
-
-	 // WRITE: 4'b1000 to address 00011
+    // WRITE: 4'b1000 to address 00011
     addr = 5'b00011;
     val  = 4'b1000;
-    @(posedge CLOCK_50);      
+    @(posedge clk);
+    w = 1'b1; @(posedge clk); w = 1'b0;
 
-    w = 1'b0;                 
-    @(posedge CLOCK_50);
-    w = 1'b1;
-	 
-	 
-    // READBACK 
+    // READBACK: set address and let dout appear on LEDR[3:0]
     addr = 5'b00001;
-    @(posedge CLOCK_50);      
-    @(posedge CLOCK_50);     
+    @(posedge clk);
+    @(posedge clk);
 
     $stop;
   end

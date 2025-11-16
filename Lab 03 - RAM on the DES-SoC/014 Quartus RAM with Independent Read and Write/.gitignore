@@ -1,0 +1,17 @@
+# Quartus build outputs
+quartus/build/
+quartus/db/
+quartus/incremental_db/
+quartus/output_files/
+quartus/simulation/
+
+# ModelSim/Questa
+sim/modelsim/work/
+sim/modelsim/*.wlf
+sim/modelsim/wlf*
+
+# Editor/backup files
+*.bak
+*.log
+*.rpt
+
