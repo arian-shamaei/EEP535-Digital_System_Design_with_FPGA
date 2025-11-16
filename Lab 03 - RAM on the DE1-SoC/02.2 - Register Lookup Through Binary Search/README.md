@@ -1,5 +1,8 @@
 # 02.2 - Register Lookup Through Binary Search
 
+[![Binary Search ASM](bsearch_asm.png)
+
+
 Overview
 - Implement a binary-search based register lookup using an ASM/ASMD approach with on-chip memory.
 - Read a sorted table from RAM, compare against a target key, and report match/fail over HEX/LED outputs.
