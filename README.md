@@ -36,14 +36,14 @@ This repository organizes lab materials and student projects for EEP 535. Labs t
 ## Tooling
 
 - Quartus Prime Lite (Cyclone V device support)
-- ModelSim/Questa (Intel FPGA Edition)
+- ModelSim (Intel FPGA Edition)
+- SignalTap (built into Quartus) 
 
 ## Getting Started
 
 1. Open a sublab folder in Quartus; review its README for details.
 2. Simulate in ModelSim; then compile and program DE1-SoC for hardware demos.
-3. SignalTap; used to probe and analyze hardware pins 
 
 ## License
 
-Unless otherwise noted in a subfolder, content is provided under the MIT License.
+The material is based on exercises in UW's EEP 535 -- Digital System Design Using FPGA.
