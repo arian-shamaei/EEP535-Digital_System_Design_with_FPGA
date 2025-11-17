@@ -49,6 +49,28 @@ module DE1_SoC (
     .done   (done),
     .cycles (cycle_count)
   );
+
+  // decimal digits for location (only when found)
+  logic [3:0] loc_tens;
+  logic [3:0] loc_ones;
+  logic [4:0] loc_dec;
+  logic [7:0] cyc_dec;
+  logic [3:0] cyc_tens;
+  logic [3:0] cyc_ones;
+  logic        loc_blank;
+  always_comb begin
+    loc_dec  = loc;
+    loc_tens = 4'hF;
+    loc_ones = 4'hF;
+    cyc_dec  = cycle_count;
+    cyc_tens = (cyc_dec / 10) % 10;
+    cyc_ones = cyc_dec % 10;
+    loc_blank = ~found;
+    if (found) begin
+      loc_tens = loc_dec / 10;
+      loc_ones = loc_dec % 10;
+    end
+  end
   
   // outputs
   assign LEDR[9] = found;
@@ -62,12 +84,18 @@ module DE1_SoC (
   assign LEDR[7] = 1'b0;
   assign LEDR[8] = 1'b0;
 
-  seg7 h0 (.val(loc[3:0]),        .seg(HEX0)); // Loc LSB
-  seg7 h1 (.val({3'b000, loc[4]}),.seg(HEX1)); // Loc MSB
-  seg7 h2 (.val(cycle_count[3:0]),.seg(HEX2)); // cycle count LSBs
-  seg7 h3 (.val(cycle_count[7:4]),.seg(HEX3)); // cycle count MSBs
-  seg7 h4 (.val(4'hF),            .seg(HEX4)); // off
-  seg7 h5 (.val(4'hF),            .seg(HEX5)); // off
+  // Location hex on HEX0/HEX1 (blank when not found)
+  logic [3:0] loc_hex_hi;
+  logic [3:0] loc_hex_lo;
+  assign loc_hex_lo = found ? loc[3:0]        : 4'hF;
+  assign loc_hex_hi = found ? {3'b000, loc[4]}: 4'hF;
+  // Location in decimal on HEX2/HEX3 (blank when not found); cycle counter on HEX4/HEX5
+  seg7 h0 (.val(loc_hex_lo),      .blank(loc_blank), .seg(HEX0)); // Loc LSB (hex) or off
+  seg7 h1 (.val(loc_hex_hi),      .blank(loc_blank), .seg(HEX1)); // Loc MSB (hex) or off
+  seg7 h2 (.val(loc_ones),        .blank(loc_blank), .seg(HEX2)); // loc ones digit (decimal/off)
+  seg7 h3 (.val(loc_tens),        .blank(loc_blank), .seg(HEX3)); // loc tens digit (decimal/off)
+  seg7 h4 (.val(cyc_ones),        .blank(1'b0),      .seg(HEX4)); // cycle count ones (decimal)
+  seg7 h5 (.val(cyc_tens),        .blank(1'b0),      .seg(HEX5)); // cycle count tens  (decimal)
 
 endmodule
 
@@ -194,6 +222,7 @@ module DE1_SoC_tb;
       7'b1000110: seg_to_nibble = 4'hC;
       7'b0100001: seg_to_nibble = 4'hD;
       7'b0000110: seg_to_nibble = 4'hE;
+      7'b0001110: seg_to_nibble = 4'hF;
       7'b1111111: seg_to_nibble = 4'hF;
       default:    seg_to_nibble = 4'hF;
     endcase
@@ -226,7 +255,7 @@ module DE1_SoC_tb;
     bit expected_found;
     logic [3:0] hi_digit;
     logic [3:0] lo_digit;
-    logic [4:0] loc_from_hex;
+    int loc_from_hex;
     begin
       expected_loc   = find_in_mem(key);
       expected_found = (expected_loc != -1);
@@ -237,9 +266,14 @@ module DE1_SoC_tb;
       @(posedge CLOCK_50);
       wait (dut.assm.ps == 3'd0);
 
-      lo_digit    = seg_to_nibble(HEX0);
-      hi_digit    = seg_to_nibble(HEX1);
-      loc_from_hex = {hi_digit[0], lo_digit};
+      lo_digit     = seg_to_nibble(HEX2);          // ones place (decimal/off)
+      hi_digit     = seg_to_nibble(HEX3);          // tens place (decimal/off)
+
+      if (hi_digit == 4'hF && lo_digit == 4'hF) begin
+        loc_from_hex = -1; // show as off
+      end else begin
+        loc_from_hex = (hi_digit * 10) + lo_digit;
+      end
 
       $display("  -> LEDR9=%0b Loc_HEX=%0d (expected %0d)", LEDR[9], loc_from_hex, expected_loc);
 
@@ -247,11 +281,11 @@ module DE1_SoC_tb;
         $error("LEDR[9] mismatch for key 0x%0h (expected %0b)", key, expected_found);
 
       if (expected_found) begin
-        if (loc_from_hex !== expected_loc[4:0])
+        if (loc_from_hex !== expected_loc)
           $error("HEX loc mismatch for key 0x%0h (expected %0d)", key, expected_loc);
       end else begin
-        if (loc_from_hex !== 5'd0)
-          $error("HEX loc should be 0 when value not found (key 0x%0h)", key);
+        if (!(hi_digit == 4'hF && lo_digit == 4'hF))
+          $error("HEX loc should be off when value not found (key 0x%0h)", key);
       end
     end
   endtask

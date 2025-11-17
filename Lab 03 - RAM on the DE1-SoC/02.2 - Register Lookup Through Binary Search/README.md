@@ -17,6 +17,14 @@ How to run
 - Load or preset the memory contents as specified; set the search key via switches.
 - Start the search per the handout controls; observe HEX/LEDs for address probes and final result.
 
+How to operate on hardware
+- Set the 8-bit search key on `SW[7:0]`. Keep `SW9` low when changing the key.
+- To start a search, pulse `SW9` high for one clock (toggle up then back down). `KEY0` is active-low reset.
+- `HEX0/HEX1` show the found address in hex (blank if not found).
+- `HEX2/HEX3` show the found address in decimal (blank if not found).
+- `HEX4/HEX5` show the cycle count (in decimal) from Start to Done.
+- `LEDR9` lights when the key is found; other LEDs are unused.
+
 What to verify
 - Search probes midpoints correctly and narrows the range each step.
 - Success flag asserts on a found key; failure sets the not-found indication after bounds cross.
